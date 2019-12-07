@@ -18,7 +18,6 @@ const SideBar = () => (
       }
     `}
     render={data => {
-      console.log(data);
       return (
         <aside>
           <h2>Categories</h2>

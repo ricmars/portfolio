@@ -10,10 +10,26 @@ module.exports = {
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
-        defaultLayouts: { default: path.resolve("./src/components/layout.js") }
+        extensions: [".mdx", ".md"],
+        defaultLayouts: { default: path.resolve("./src/components/layout.js") },
+        globalScope: `
+          import { UIComponents } from '${__dirname}/src/cms/theme'
+          export default {
+            ...UIComponents
+          }
+        `
       }
     },
-    "gatsby-plugin-netlify-cms",
+    {
+      resolve: "gatsby-plugin-netlify-cms",
+      options: {
+        modulePath: `${__dirname}/src/cms/cms.js`,
+        enableIdentityWidget: false,
+        publicPath: "admin",
+        htmlTitle: "Admin",
+        manualInit: true
+      }
+    },
     "gatsby-plugin-react-helmet",
     {
       resolve: `gatsby-source-filesystem`,
