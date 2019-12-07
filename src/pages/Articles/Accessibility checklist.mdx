@@ -1,0 +1,21 @@
+# Accessibility checklist
+Making an application compliant to WCAG 2 AA standards can be difficult and confusing at first. To help, here’s a simple checklist for your applications:
+
+HTML is semantic and well-structured. JS is error free.
+Every interactive item can be accessed using only a keyboard in the expected order and without being trapped.
+All forms, field items, links, page titles, and headers are properly and clearly labeled. (e.g. Not “click here”, but “the article on WCAG”; or not “Name” but, “Your full name”)
+All image tags must have an alt attribute set (also known as a tooltip in Pega). Images that are decorative (like an icon in front of a label in a button) can leave the alt value blank. All other images need a clear description. (e.g. Not “A picture of a girl”, but “A little girl on the beach smiling.”)
+Any 'All caps' text that is not an abbreviation should be typed in its proper casing, then use CSS to adjust it.
+All text has a contrast ratio of 4.5:1 (A sample contrast checking tool)
+Do not rely on color or visual position alone to convey meaning and information.
+Users must be informed of any important notifications or document changes.
+The application is understandable and usable with CSS disabled.
+The language on the page and elements that differ from the page are set properly.
+Keyboard users should have a quick way to access the various areas of the application.
+Frames are named.
+Plugins are linked on the page requiring them.
+Anything with a timeout (except for live events) must allow a user to extend the time limit.
+Do not flash anything over 3 times in 1 second.
+Do not auto-play media unless the user set that option.
+Time-based media (audio/video) must have an alternate way to understand the content. (i.e. a transcript or captions).
+Finally, compliance != usable. Test your newly-compliant application with actual users.
