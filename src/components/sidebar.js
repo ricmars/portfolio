@@ -24,7 +24,7 @@ const SideBar = () => (
           <h2>Categories</h2>
           <ul>
             {data.allSitePage.nodes.map(node => {
-              if (node.path !== "" && node.context.frontmatter && node.context.frontmatter.title !== "") {
+              if (node.path !== "" && node.context && node.context.frontmatter && node.context.frontmatter.title !== "") {
                 return (
                   <ul>
                     <Link to={node.path}>{node.context.frontmatter.title}</Link>
