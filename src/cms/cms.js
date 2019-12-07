@@ -1,6 +1,6 @@
 import { MdxControl, MdxPreview } from "netlify-cms-widget-mdx";
 import React, { Component } from "react";
-import CMS, { init } from "netlify-cms";
+import CMS, { init } from "netlify-cms-app";
 import { Theme, LayoutComponents, UIComponents } from "./theme";
 
 // Custom components need refs for validation and thus must be a class.
