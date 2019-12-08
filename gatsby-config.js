@@ -11,7 +11,7 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [".mdx", ".md"],
-        defaultLayouts: { default: path.resolve("./src/components/layout.js") },
+        defaultLayouts: { default: path.resolve("./src/components/layoutmdx.js") },
         globalScope: `
           import { UIComponents } from '${__dirname}/src/cms/theme'
           export default {
