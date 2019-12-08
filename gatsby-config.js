@@ -2,22 +2,33 @@ const path = require("path");
 
 module.exports = {
   siteMetadata: {
-    title: "Pega Design System",
-    description: "Pega design system",
-    author: "@marsr"
+    title: "Pega Cosmos",
+    titleTemplate: "%s · template",
+    author: "@marsr",
+    description: "Cosmos design system",
+    url: "https://design.pega.com.com",
+    image: "/images/site-preview.jpg",
+    owner: "Pegasystems",
+    twitterUsername: "@Pegasystems",
+    facebookAppID: "",
+    nav: [
+      { path: "https://medium.com/@pegasystems", name: "Blog", hidden: true },
+      { path: "/#about", name: "About" },
+      { path: "/#process", name: "Process" },
+      { path: "/#speaking", name: "Speaking" },
+      { path: "/#contact", name: "Contact" }
+    ],
+    categories: [
+      { slug: "uxdesign", name: "UX Design" },
+      { slug: "cosmos", name: "Cosmos Design System" }
+    ]
   },
   plugins: [
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [".mdx", ".md"],
-        defaultLayouts: { default: path.resolve("./src/components/layoutmdx.js") },
-        globalScope: `
-          import { UIComponents } from '${__dirname}/src/cms/theme'
-          export default {
-            ...UIComponents
-          }
-        `
+        defaultLayouts: { default: path.resolve("./src/components/layoutmdx.js") }
       }
     },
     {
@@ -50,6 +61,29 @@ module.exports = {
       options: {
         name: `pages`,
         path: `${__dirname}/src/pages`
+      }
+    },
+    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-source-airtable`,
+      options: {
+        apiKey: `keyzkTIXGeU5wOPvw`,
+        tables: [
+          {
+            baseId: `appv74xPKsXt7Nt1x`,
+            tableName: `Sections`,
+            tableView: `All`,
+            mapping: { Body: "text/markdown" },
+            tableLinks: [`Pages`]
+          },
+          {
+            baseId: `appv74xPKsXt7Nt1x`,
+            tableName: `Pages`,
+            tableView: `All`,
+            mapping: { Body: "text/markdown" },
+            tableLinks: [`Section`]
+          }
+        ]
       }
     },
     "gatsby-transformer-sharp",
