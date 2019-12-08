@@ -7,7 +7,6 @@ import Layout from "./src/components/layoutmdx"
 
 // Wraps every page in a component
 export const wrapPageElement = ({ element, props }) => {
-  debugger;
   if ( props.path === "/list-articles/" || element.type.displayName === "HotExported_default") {
     return <Layout>{element}</Layout>;
   }
