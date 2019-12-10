@@ -18,10 +18,10 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - name: mdx
-    label: Mdx Example
-    description: Documentation
-    folder: src/pages/mdx
+  - name: pages
+    label: Pages
+    description: List of pages
+    folder: content/pages
     extension: mdx
     format: frontmatter
     widget: mdx
@@ -30,22 +30,26 @@ collections:
       - { label: "Template Key", name: "templateKey", widget: "hidden", default: "mdx-example" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Featured Image", name: "featuredimage", widget: image }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Featured Image", name: "featuredimage", widget: image, required: false }
       - { label: "Body", name: "body", widget: "mdx" }
-      - { label: "Category", name: "category", widget: "category" }
+      - { label: "Category", name: "category", widget: "category", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
 
-  - name: "page"
-    label: "page"
-    folder: "src/pages/cms"
+  - name: articles
+    label: Articles
+    description: List of articles
+    folder: content/articles
+    extension: mdx
+    format: frontmatter
+    widget: mdx
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-post" }
+      - { label: "Template Key", name: "templateKey", widget: "hidden", default: "mdx-example" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Featured Image", name: "featuredimage", widget: image }
-      - { label: "Body", name: "body", widget: "markdown" }
-      - { label: "Tags", name: "tags", widget: "list" }
-      - { label: "Categories", name: "categories", widget: "category" }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Featured Image", name: "featuredimage", widget: image, required: false }
+      - { label: "Body", name: "body", widget: "mdx" }
+      - { label: "Category", name: "category", widget: "category", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }

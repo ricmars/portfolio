@@ -4,10 +4,11 @@ import { StaticQuery, graphql, Link } from "gatsby";
 const SideBar = () => (
   <StaticQuery
     query={graphql`
-      query QueryListMDX {
+      {
         allSitePage {
           nodes {
             path
+            id
             context {
               frontmatter {
                 title
@@ -25,7 +26,7 @@ const SideBar = () => (
             {data.allSitePage.nodes.map(node => {
               if (node.path !== "" && node.context && node.context.frontmatter && node.context.frontmatter.title !== "") {
                 return (
-                  <ul>
+                  <ul key={node.id}>
                     <Link to={node.path}>{node.context.frontmatter.title}</Link>
                   </ul>
                 );

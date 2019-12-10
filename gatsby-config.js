@@ -3,77 +3,85 @@ const path = require("path");
 module.exports = {
   siteMetadata: {
     title: "Pega Cosmos",
-    titleTemplate: "%s · template",
     author: "@marsr",
     description: "Cosmos design system",
     url: "https://design.pega.com.com",
-    image: "/images/site-preview.jpg",
+    image: "/img/site-preview.jpg",
     owner: "Pegasystems",
     twitterUsername: "@Pegasystems",
-    facebookAppID: "",
-    nav: [
-      { path: "https://medium.com/@pegasystems", name: "Blog", hidden: true },
-      { path: "/#about", name: "About" },
-      { path: "/#process", name: "Process" },
-      { path: "/#speaking", name: "Speaking" },
-      { path: "/#contact", name: "Contact" }
-    ],
-    categories: [
-      { slug: "uxdesign", name: "UX Design" },
-      { slug: "cosmos", name: "Cosmos Design System" }
-    ]
+    facebookAppID: ""
   },
   plugins: [
     "gatsby-plugin-react-helmet",
     {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1360,
+              withWebp: true,
+              showCaptions: true,
+              quality: 75,
+              wrapperStyle: `margin: 7vw 0;`
+            }
+          },
+          {
+            resolve: "gatsby-remark-embed-markdown",
+            options: {
+              directory: `${__dirname}/content`
+            }
+          },
+          {
+            resolve: `gatsby-remark-embed-snippet`,
+            options: {
+              directory: `${__dirname}/content`
+            }
+          },
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {}
+          }
+        ]
+      }
+    },
+    {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [".mdx", ".md"],
-        defaultLayouts: { default: path.resolve("./src/components/layoutmdx.js") }
+        defaultLayouts: { default: path.resolve("./src/components/layoutmdx.js") },
+        // Handle images inside posts
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1080,
+              tracedSVG: true
+            }
+          }
+        ],
+        plugins: [`gatsby-remark-images`]
       }
     },
     {
-      resolve: `gatsby-source-drupal`,
+      resolve: `gatsby-plugin-page-creator`,
       options: {
-        baseUrl: `https://gatsbytestogxxj8zcbs.devcloud.acquia-sites.com/`,
-        apiBase: `jsonapi`
-      }
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`
+        path: `${__dirname}/content/pages`
       }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `pages`,
-        path: `${__dirname}/src/pages`
+        path: `${__dirname}/content/pages`
       }
     },
-    `gatsby-transformer-remark`,
     {
-      resolve: `gatsby-source-airtable`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        apiKey: `keyzkTIXGeU5wOPvw`,
-        tables: [
-          {
-            baseId: `appv74xPKsXt7Nt1x`,
-            tableName: `Sections`,
-            tableView: `All`,
-            mapping: { Body: "text/markdown" },
-            tableLinks: [`Pages`]
-          },
-          {
-            baseId: `appv74xPKsXt7Nt1x`,
-            tableName: `Pages`,
-            tableView: `All`,
-            mapping: { Body: "text/markdown" },
-            tableLinks: [`Section`]
-          }
-        ]
+        name: `pages`,
+        path: `${__dirname}/static/img`
       }
     },
     "gatsby-transformer-sharp",
@@ -87,7 +95,7 @@ module.exports = {
         background_color: "#663399",
         theme_color: "#663399",
         display: "minimal-ui",
-        icon: "src/images/gatsby-icon.png" // This path is relative to the root of the site.
+        icon: `${__dirname}/static/img/gatsby-icon.png`
       }
     },
     {
@@ -100,8 +108,5 @@ module.exports = {
         manualInit: true
       }
     }
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.app/offline
-    // 'gatsby-plugin-offline',
   ]
 };

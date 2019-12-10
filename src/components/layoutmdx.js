@@ -2,7 +2,7 @@
 
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
-import { Button, Avatar } from "./cosmos/cosmos";
+import { Button, Avatar } from "../cosmos/cosmos";
 import { Link } from "gatsby";
 
 export const mapping = {
