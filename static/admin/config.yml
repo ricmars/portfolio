@@ -13,6 +13,7 @@ backend:
     uploadMedia: "[skip ci] Upload “{{path}}”"
     deleteMedia: "[skip ci] Delete “{{path}}”"
 
+display_url: http://localhost:8000
 media_folder: static/img
 public_folder: /img
 
@@ -26,12 +27,13 @@ collections:
     widget: mdx
     create: true
     fields:
-      - { label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-post" }
+      - { label: "Template Key", name: "templateKey", widget: "hidden", default: "mdx-example" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Featured Image", name: "featuredimage", widget: image }
-      - { label: Body, name: body, widget: mdx }
+      - { label: "Body", name: "body", widget: "mdx" }
+      - { label: "Category", name: "category", widget: "category" }
 
   - name: "page"
     label: "page"
@@ -46,3 +48,4 @@ collections:
       - { label: "Featured Image", name: "featuredimage", widget: image }
       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Categories", name: "categories", widget: "category" }

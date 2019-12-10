@@ -1,16 +1,18 @@
+/* eslint jsx-a11y/heading-has-content:0 */
+
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { Button, Avatar } from "./cosmos/cosmos";
 import { Link } from "gatsby";
 
-const mapping = {
+export const mapping = {
   Button: props => <Button {...props} />,
   Avatar: props => <Avatar {...props} />,
   a: props => <Link {...props} />,
-  h1: props => <h1 {...props} style={{ color: "red" }} />,
-  h2: props => <h1 {...props} style={{ color: "green" }} />,
-  h3: props => <h1 {...props} style={{ color: "blue" }} />,
-  p: props => <p {...props} style={{ color: "rebeccapurple" }} />
+  h1: props => <h1 {...props} style={{ color: "#000" }} />,
+  h2: props => <h1 {...props} style={{ color: "#000" }} />,
+  h3: props => <h1 {...props} style={{ color: "#000" }} />,
+  p: props => <p {...props} style={{ color: "#000" }} />
 };
 
 export default function Layout({ children }) {

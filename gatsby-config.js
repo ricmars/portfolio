@@ -24,6 +24,7 @@ module.exports = {
     ]
   },
   plugins: [
+    "gatsby-plugin-react-helmet",
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
@@ -38,17 +39,6 @@ module.exports = {
         apiBase: `jsonapi`
       }
     },
-    {
-      resolve: "gatsby-plugin-netlify-cms",
-      options: {
-        modulePath: `${__dirname}/src/cms/cms.js`,
-        enableIdentityWidget: false,
-        publicPath: "admin",
-        htmlTitle: "Admin",
-        manualInit: true
-      }
-    },
-    "gatsby-plugin-react-helmet",
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -98,6 +88,16 @@ module.exports = {
         theme_color: "#663399",
         display: "minimal-ui",
         icon: "src/images/gatsby-icon.png" // This path is relative to the root of the site.
+      }
+    },
+    {
+      resolve: "gatsby-plugin-netlify-cms",
+      options: {
+        modulePath: `${__dirname}/src/cms/cms.js`,
+        enableIdentityWidget: false,
+        publicPath: "admin",
+        htmlTitle: "Admin",
+        manualInit: true
       }
     }
     // this (optional) plugin enables Progressive Web App + Offline functionality

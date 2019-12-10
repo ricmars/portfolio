@@ -1,8 +1,8 @@
-import { MdxControl, MdxPreview } from "netlify-cms-widget-mdx";
+import { setupPreview } from "netlify-cms-widget-mdx";
 import React, { Component } from "react";
 import CMS, { init } from "netlify-cms-app";
-import { FileSystemBackend } from "netlify-cms-backend-fs";
-import { Theme, LayoutComponents, UIComponents } from "./theme";
+import FileSystemBackend from "netlify-cms-backend-fs";
+import { mapping } from "../components/layoutmdx";
 
 const isClient = typeof window !== "undefined";
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -19,45 +19,76 @@ if (isDevelopment) {
   CMS.registerBackend("file-system", FileSystemBackend);
 }
 
-// Custom components need refs for validation and thus must be a class.
-// Additionally, after <Theme>, only one child is allowed.
-// See https://github.com/netlify/netlify-cms/issues/1346
-class MDXWidget extends Component {
+class myMdxControl extends Component {
+  handleChange = e => {
+    this.props.onChange(e.target.value);
+  };
+
   render() {
-    return (
-      <Theme>
-        <MdxControl {...this.props} />
-      </Theme>
-    );
+    var value = this.props.value;
+    return <textarea style={{ minHeight: "50rem" }} value={value} onChange={this.handleChange} />;
   }
 }
 
-// The preview window which renders MDX content.
-// Docs: https://www.netlifycms.org/docs/customization/
-const PreviewWindow = props => {
-  //const iframe = document.getElementsByTagName("iframe")[0];
+CMS.registerWidget(
+  "mdx",
+  myMdxControl,
+  setupPreview({
+    scope: mapping
+  })
+);
 
-  const mdxProps = {
-    // This key represents html elements used in markdown; h1, p, etc
-    components: LayoutComponents,
-    // Pass components used in the editor (and shared throughout mdx) here:
-    scope: UIComponents,
-
-    mdPlugins: []
+class CategoriesControl extends Component {
+  handleChange = e => {
+    this.props.onChange(e.target.value.split(",").map(e => e.trim()));
   };
 
-  return (
-    <Theme>
-      <MdxPreview mdx={mdxProps} {...props} />
-    </Theme>
-  );
-};
+  render() {
+    var value = this.props.value;
+    return <textarea style={{ minHeight: "10rem" }} value={value ? value.join(", ") : ""} onChange={this.handleChange} />;
+  }
+}
 
-// Netlify collections that set `widget: mdx` will be able to use this custom
-// widget. NOTE: The StyleSheet manager can *only* be injected into the Preview.
-// Docs: https://www.netlifycms.org/docs/widgets/
+class CategoriesPreview extends Component {
+  render() {
+    return (
+      <ul>
+        {this.props.value.map(function(val, index) {
+          return <li key={index}>{val}</li>;
+        })}
+      </ul>
+    );
+  }
+}
+CMS.registerWidget("category", CategoriesControl, CategoriesPreview);
 
-CMS.registerWidget("mdx", MDXWidget, PreviewWindow);
+CMS.registerPreviewStyle("../cosmos.css");
+
+CMS.registerEditorComponent({
+  // Internal id of the component
+  id: "youtube",
+  // Visible label
+  label: "Youtube",
+  // Fields the user need to fill out when adding an instance of the component
+  fields: [{ name: "id", label: "Youtube Video ID", widget: "string" }],
+  // Pattern to identify a block as being an instance of this component
+  pattern: /^youtube (\S+)$/,
+  // Function to extract data elements from the regexp match
+  fromBlock: function(match) {
+    return {
+      id: match[1]
+    };
+  },
+  // Function to create a text block from an instance of this component
+  toBlock: function(obj) {
+    return "youtube " + obj.id;
+  },
+  // Preview output for this component. Can either be a string or a React component
+  // (component gives better render performance)
+  toPreview: function(obj) {
+    return '<img src="http://img.youtube.com/vi/' + obj.id + '/maxresdefault.jpg" alt="Youtube Video"/>';
+  }
+});
 
 // Start the CMS
 init();

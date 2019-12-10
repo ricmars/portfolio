@@ -5,7 +5,7 @@ import { StaticQuery, graphql } from "gatsby";
 import Header from "./header";
 import SideBar from "./sidebar";
 import "./layout.css";
-import "./cosmos/cosmos.css";
+import "../../static/cosmos.css";
 
 const Layout = ({ children }) => (
   <StaticQuery
