@@ -25,7 +25,7 @@ class myMdxControl extends Component {
 
   render() {
     var value = this.props.value;
-    return <textarea style={{ minHeight: "50rem" }} value={value} onChange={this.handleChange} />;
+    return <textarea style={{ minHeight: "50rem", width: "100%" }} value={value} onChange={this.handleChange} />;
   }
 }
 
