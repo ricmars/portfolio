@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import CMS, { init } from "netlify-cms-app";
 import FileSystemBackend from "netlify-cms-backend-fs";
 import { mapping } from "../components/layoutmdx";
-import "./cms.css";
 const isClient = typeof window !== "undefined";
 const isDevelopment = process.env.NODE_ENV === "development";
 
@@ -63,6 +62,7 @@ class CategoriesPreview extends Component {
 CMS.registerWidget("category", CategoriesControl, CategoriesPreview);
 
 CMS.registerPreviewStyle("../cosmos.css");
+CMS.registerPreviewStyle("./cms.css");
 
 CMS.registerEditorComponent({
   // Internal id of the component
