@@ -95,7 +95,7 @@ module.exports = {
         background_color: "#663399",
         theme_color: "#663399",
         display: "minimal-ui",
-        icon: `${__dirname}/static/img/gatsby-icon.png`
+        icon: `${__dirname}/static/img/favicon-32x32.png`
       }
     },
     {
