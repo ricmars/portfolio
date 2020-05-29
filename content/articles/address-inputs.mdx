@@ -1,0 +1,21 @@
+---
+templateKey: mdx-example
+title: Address inputs
+date: 2020-05-29T19:59:00.980Z
+description: >
+  Address inputs vary widely from country to country. Pega UX recommends the
+  following pattern for the most inclusive workflow.
+---
+
+Address inputs vary widely from country to country. Pega UX recommends the following pattern for the most inclusive workflow.
+
+1. If available and the user is online, use the Location Autocomplete component to capture user data.
+2. Otherwise, if a user's needs are exclusive to a single specific country, find and follow the country standards found on Wikipedia.
+3. However, a user's needs may span across multiple countries, in which case use the generic template below (source: Wikipedia)
+Country: Fields, labels, and languages may need to change based on this answer, so it must be first.
+Street
+City area / District
+City / Town / Village
+County
+Postal code
+Finally, all address values should use the standard naming found [in the semantic autocomplete attribute spec](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#Values).
